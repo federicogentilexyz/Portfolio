@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visual identity Kiki Radio</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<header class="header">
+  <button class="menu-btn" aria-label="Toggle menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <a href="index.html" class="site-title">Federico Gentile</a>
+
+  <div class="menu-panel">
+    <nav class="menu-nav">
+      <a href="index.html" class="menu-link">Works</a>
+      <a href="about.html" class="menu-link">About</a>
+      <a href="contacts.html" class="menu-link">Contacts</a>
+    </nav>
+  </div>
+</header>
+
+<main class="work-page">
+
+  <!-- ==================== HERO / CAROUSEL ==================== -->
+  <section class="work-hero">
+    <div class="work-carousel">
+
+      <!-- Slide immagine -->
+      <div class="carousel-slide active">
+        <img src="assets/images/Kiki/Kiki graphics.jpg" alt="Monolith installation view">
+      </div>
+
+      <div class="carousel-slide">
+        <img src="assets/images/Kiki/Kiki graphics2.jpg" alt="Monolith detail">
+      </div>
+
+
+
+    </div>
+
+ <!-- controlli -->
+    <button class="carousel-btn prev">⟨</button>
+    <button class="carousel-btn next">⟩</button>
+  </section>
+  <!-- ==================== INFO ==================== -->
+  <section class="work-info">
+    <div class="work-info-block">
+      <span class="info-label">Year</span>
+      <span class="info-value">2025</span>
+    </div>
+
+    <div class="work-info-block">
+      <span class="info-label">Type</span>
+      <span class="info-value">Visual identity</span>
+    </div>
+
+
+
+  </section>
+
+  <!-- ==================== DESCRIPTION ==================== -->
+  <section class="work-description">
+    <p>
+The project involved curating a range of programs reflecting the station’s experimental, community-driven ethos, with a focus on emerging sounds, collaborative formats, and local scenes. In parallel, all aspects of graphic design were managed, shaping the visual identity across web, social media, and print. Presented here is a selection of graphic design works created for the radio.
+    </p>
+
+   
+ </main>
+ </section>
+
+<footer class="footer">
+  <p>© Federico Gentile / 2026 / Venice, 30121, IT</p>
+</footer>
+
+<!-- JS -->
+<script src="js/main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const slides = document.querySelectorAll('.carousel-slide');
+  const nextBtn = document.querySelector('.carousel-btn.next');
+  const prevBtn = document.querySelector('.carousel-btn.prev');
+  
+  // Se non ci sono slide o bottoni, non fare nulla (evita errori)
+  if (slides.length === 0) return;
+
+  let currentSlide = 0;
+  const intervalTime = 4000; // Tempo in millisecondi (4000ms = 4 secondi)
+  let slideInterval;
+
+  // Funzione per mostrare una slide specifica
+  const showSlide = (index) => {
+    // Rimuovi la classe active da tutte le slide
+    slides.forEach(slide => slide.classList.remove('active'));
+
+    // Calcola l'indice corretto (gestisce il loop infinito)
+    if (index >= slides.length) {
+      currentSlide = 0;
+    } else if (index < 0) {
+      currentSlide = slides.length - 1;
+    } else {
+      currentSlide = index;
+    }
+
+    // Aggiungi la classe active alla slide corrente
+    slides[currentSlide].classList.add('active');
+  };
+
+  // Funzione per passare alla prossima slide
+  const nextSlide = () => {
+    showSlide(currentSlide + 1);
+  };
+
+  // Funzione per passare alla slide precedente
+  const prevSlide = () => {
+    showSlide(currentSlide - 1);
+  };
+
+  // Avvia l'autoplay
+  const startSlideShow = () => {
+    slideInterval = setInterval(nextSlide, intervalTime);
+  };
+
+  // Ferma e riavvia l'autoplay (utile quando si clicca manualmente)
+  const resetTimer = () => {
+    clearInterval(slideInterval);
+    startSlideShow();
+  };
+
+  // Event Listeners per i bottoni (se esistono)
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      nextSlide();
+      resetTimer(); // Resetta il timer al click
+    });
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      prevSlide();
+      resetTimer(); // Resetta il timer al click
+    });
+  }
+
+  // Avvia il carosello all'apertura
+  startSlideShow();
+});
+</script>
+</body>
+</html>

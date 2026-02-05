@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Possible infinities</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<header class="header">
+  <button class="menu-btn" aria-label="Toggle menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <a href="index.html" class="site-title">Federico Gentile</a>
+
+  <div class="menu-panel">
+    <nav class="menu-nav">
+      <a href="index.html" class="menu-link">Works</a>
+      <a href="about.html" class="menu-link">About</a>
+      <a href="contacts.html" class="menu-link">Contacts</a>
+    </nav>
+  </div>
+</header>
+
+<main class="work-page">
+
+  <!-- ==================== HERO / CAROUSEL ==================== -->
+  <section class="work-hero">
+    <div class="work-carousel">
+
+      <!-- Slide immagine -->
+      <div class="carousel-slide active">
+        <img src="assets/images/pi/01.jpg" alt="Monolith installation view">
+      </div>
+
+      <div class="carousel-slide">
+        <img src="assets/images/pi/02.jpg" alt="Monolith detail">
+      </div>
+
+        <div class="carousel-slide">
+        <img src="assets/images/pi/03.jpg" alt="Monolith installation view">
+      </div>
+
+    </div>
+
+   <!-- controlli -->
+    <button class="carousel-btn prev">⟨</button>
+    <button class="carousel-btn next">⟩</button>
+  </section>
+
+  <!-- ==================== INFO ==================== -->
+  <section class="work-info">
+    <div class="work-info-block">
+      <span class="info-label">Year</span>
+      <span class="info-value">2025</span>
+    </div>
+
+    <div class="work-info-block">
+      <span class="info-label">Type</span>
+      <span class="info-value">Ambisonics sound installation (00:53:10)
+</span>
+    </div>
+
+    
+     <div class="work-info-block">
+      <span class="info-label">Dimensions</span>
+      <span class="info-value">
+        Sculpture (200x200x200cm)
+      </span>
+    </div>
+
+    <div class="work-info-block">
+      <span class="info-label">Materials</span>
+      <span class="info-value">
+        Aluminium, paint, compression horn speakers, 3D-printed PETG CF, amplifiers, cabling, steel
+
+      </span>
+    </div>
+
+  </section>
+
+  <!-- ==================== DESCRIPTION ==================== -->
+  <section class="work-description">
+    <p>
+“Possible Infinities” is a site specific sound installation created by artist Pier Alfeo and designed with my contribution on all aspects of 3D modeling. Set in the historic garden of Carlo Scarpa at Fondazione Querini Stampalia in Venice the sculpture is the second of Pier Alfeo’s series “Biomimesi” and it takes inspiration from Luigi Nono’s composition “A Carlo Scarpa, architetto, ai suoi infiniti possibili”. At the heart of the project lies MCDSBA (Markov Chain Driven Structural Blooming Algorithms), an innovative framework co-developed by Pier Alfeo and Francesco Vitucci at the Conservatorio “N. Piccinni” in Bari. This system converts musical scores into three-dimensional graphs, generating new soundscapes that preserve the spirit of the original compositions while evolving into autonomous, living sonic forms.</p>
+
+    <p>
+It features a composition reproduced by a multi-channel speaker network and the main structure was realized by designing a system composed of metal tubular poles and 3D printed elements. 
+    </p>
+
+        <p>
+“Possible Infinities” consists of a hybrid sound sculpture derived from computational analyses. A sensitive technological organism that breathes and resonates like a living system. It recalls the “spikemoss” plant, a desert species capable of returning to life after dormancy, symbolizing perpetual cycles of rebirth and transformation.
+ </p>
+
+
+ </main>
+ </section>
+
+ <section class="work-description2">
+          <p>
+Presented at Fondazione Querini Stampalia in Venice in October 2025.
+           <p>
+Special thanks to 3DP Servizi for the 3D printing.
+ </p>
+</main>
+</section>
+
+<footer class="footer">
+  <p>© Federico Gentile / 2026 / Venice, 30121, IT</p>
+</footer>
+
+<!-- JS -->
+<script src="js/main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const slides = document.querySelectorAll('.carousel-slide');
+  const nextBtn = document.querySelector('.carousel-btn.next');
+  const prevBtn = document.querySelector('.carousel-btn.prev');
+  
+  // Se non ci sono slide o bottoni, non fare nulla (evita errori)
+  if (slides.length === 0) return;
+
+  let currentSlide = 0;
+  const intervalTime = 4000; // Tempo in millisecondi (4000ms = 4 secondi)
+  let slideInterval;
+
+  // Funzione per mostrare una slide specifica
+  const showSlide = (index) => {
+    // Rimuovi la classe active da tutte le slide
+    slides.forEach(slide => slide.classList.remove('active'));
+
+    // Calcola l'indice corretto (gestisce il loop infinito)
+    if (index >= slides.length) {
+      currentSlide = 0;
+    } else if (index < 0) {
+      currentSlide = slides.length - 1;
+    } else {
+      currentSlide = index;
+    }
+
+    // Aggiungi la classe active alla slide corrente
+    slides[currentSlide].classList.add('active');
+  };
+
+  // Funzione per passare alla prossima slide
+  const nextSlide = () => {
+    showSlide(currentSlide + 1);
+  };
+
+  // Funzione per passare alla slide precedente
+  const prevSlide = () => {
+    showSlide(currentSlide - 1);
+  };
+
+  // Avvia l'autoplay
+  const startSlideShow = () => {
+    slideInterval = setInterval(nextSlide, intervalTime);
+  };
+
+  // Ferma e riavvia l'autoplay (utile quando si clicca manualmente)
+  const resetTimer = () => {
+    clearInterval(slideInterval);
+    startSlideShow();
+  };
+
+  // Event Listeners per i bottoni (se esistono)
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      nextSlide();
+      resetTimer(); // Resetta il timer al click
+    });
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      prevSlide();
+      resetTimer(); // Resetta il timer al click
+    });
+  }
+
+  // Avvia il carosello all'apertura
+  startSlideShow();
+});
+</script>
+</body>
+</html>

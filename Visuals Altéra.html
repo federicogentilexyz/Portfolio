@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visuals Altéra</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<header class="header">
+  <button class="menu-btn" aria-label="Toggle menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <a href="index.html" class="site-title">Federico Gentile</a>
+
+  <div class="menu-panel">
+    <nav class="menu-nav">
+      <a href="index.html" class="menu-link">Works</a>
+      <a href="about.html" class="menu-link">About</a>
+      <a href="contacts.html" class="menu-link">Contacts</a>
+    </nav>
+  </div>
+</header>
+
+<main class="work-page">
+
+  <!-- ==================== HERO / CAROUSEL ==================== -->
+  <section class="work-hero">
+    <div class="work-carousel">
+
+      <!-- Slide immagine -->
+      <div class="carousel-slide active">
+        <img src="assets/images/Altéra/Endless1.jpeg" alt="Monolith installation view">
+      </div>
+
+      <div class="carousel-slide">
+        <img src="assets/images/Altéra/Endless2.jpg" alt="Monolith detail">
+      </div>
+
+        <div class="carousel-slide">
+        <img src="assets/images/Altéra/Endless3.jpg" alt="Monolith installation view">
+      </div>
+
+      <div class="carousel-slide">
+        <img src="assets/images/Altéra/Endless4.jpg" alt="Monolith detail">
+      </div>
+
+
+    </div>
+
+ <!-- controlli -->
+    <button class="carousel-btn prev">⟨</button>
+    <button class="carousel-btn next">⟩</button>
+  </section>
+  <!-- ==================== INFO ==================== -->
+  <section class="work-info">
+    <div class="work-info-block">
+      <span class="info-label">Year</span>
+      <span class="info-value">2025-2026</span>
+    </div>
+
+    <div class="work-info-block">
+      <span class="info-label">Type</span>
+      <span class="info-value">Stage, visual and light design</span>
+    </div>
+
+
+
+  </section>
+
+  <!-- ==================== DESCRIPTION ==================== -->
+  <section class="work-description">
+    <p>
+Visual, stage, and lighting direction for Altera’s 2025–2026 season at Circolo Amelia in Milan.
+    </p>
+
+        <p>
+The work focuses on developing a coherent spatial and aesthetic language that connects each event within the program. The design explores how light, reflective materials, and modular scenographic elements can reshape the venue’s atmosphere and respond dynamically to sound and performance. 
+ </p>
+
+         <p>
+Across the season, the role involves an ongoing dialogue with the artists and curators of Altera to translate the conceptual direction of each event into an immersive visual and spatial experience.
+ </main>
+ </section>
+
+ <section class="work-description2">
+          <p>
+Presented at Circolo Amelia in Milan.
+           <p>
+
+</main>
+</section>
+
+<footer class="footer">
+  <p>© Federico Gentile / 2026 / Venice, 30121, IT</p>
+</footer>
+
+<!-- JS -->
+<script src="js/main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const slides = document.querySelectorAll('.carousel-slide');
+  const nextBtn = document.querySelector('.carousel-btn.next');
+  const prevBtn = document.querySelector('.carousel-btn.prev');
+  
+  // Se non ci sono slide o bottoni, non fare nulla (evita errori)
+  if (slides.length === 0) return;
+
+  let currentSlide = 0;
+  const intervalTime = 4000; // Tempo in millisecondi (4000ms = 4 secondi)
+  let slideInterval;
+
+  // Funzione per mostrare una slide specifica
+  const showSlide = (index) => {
+    // Rimuovi la classe active da tutte le slide
+    slides.forEach(slide => slide.classList.remove('active'));
+
+    // Calcola l'indice corretto (gestisce il loop infinito)
+    if (index >= slides.length) {
+      currentSlide = 0;
+    } else if (index < 0) {
+      currentSlide = slides.length - 1;
+    } else {
+      currentSlide = index;
+    }
+
+    // Aggiungi la classe active alla slide corrente
+    slides[currentSlide].classList.add('active');
+  };
+
+  // Funzione per passare alla prossima slide
+  const nextSlide = () => {
+    showSlide(currentSlide + 1);
+  };
+
+  // Funzione per passare alla slide precedente
+  const prevSlide = () => {
+    showSlide(currentSlide - 1);
+  };
+
+  // Avvia l'autoplay
+  const startSlideShow = () => {
+    slideInterval = setInterval(nextSlide, intervalTime);
+  };
+
+  // Ferma e riavvia l'autoplay (utile quando si clicca manualmente)
+  const resetTimer = () => {
+    clearInterval(slideInterval);
+    startSlideShow();
+  };
+
+  // Event Listeners per i bottoni (se esistono)
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      nextSlide();
+      resetTimer(); // Resetta il timer al click
+    });
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      prevSlide();
+      resetTimer(); // Resetta il timer al click
+    });
+  }
+
+  // Avvia il carosello all'apertura
+  startSlideShow();
+});
+</script>
+</body>
+</html>
